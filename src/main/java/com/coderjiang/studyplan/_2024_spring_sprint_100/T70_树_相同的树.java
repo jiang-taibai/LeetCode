@@ -1,4 +1,7 @@
 package com.coderjiang.StudyPlan._2024_spring_sprint_100;
+
+import com.coderjiang.LeetCodeUtil.TreeNode;
+
 import java.util.*;
 
 /**
@@ -12,9 +15,13 @@ public class T70_树_相同的树 {
     public static void main(String[] args) {
         Solution solution = new Solution();
     }
-    
+
     static class Solution {
-    
+        public boolean isSameTree(TreeNode p, TreeNode q) {
+            if (p == null && q == null) return true;
+            if (p == null || q == null || p.val != q.val) return false;
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        }
     }
-    
+
 }
