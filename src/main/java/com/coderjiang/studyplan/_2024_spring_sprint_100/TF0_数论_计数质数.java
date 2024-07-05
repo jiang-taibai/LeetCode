@@ -33,4 +33,20 @@ public class TF0_数论_计数质数 {
         }
     }
 
+    static class Solution2 {
+        public int countPrimes(int n) {
+            boolean[] prime = new boolean[n];
+            Arrays.fill(prime, true);
+            List<Integer> primes = new ArrayList<>();
+            for (int i = 2; i < n; i++) {
+                if (prime[i]) primes.add(i);
+                for (int j = 0; j < primes.size() && i * primes.get(j) < n; j++) {
+                    prime[i * primes.get(j)] = false;
+                    if (i % primes.get(j) == 0) break;
+                }
+            }
+            return primes.size();
+        }
+    }
+
 }
