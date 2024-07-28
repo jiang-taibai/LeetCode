@@ -17,25 +17,25 @@ public class DailyPractice_20240728 {
 
     static class Solution {
         public List<Integer> fallingSquares(int[][] positions) {
-            int n = positions.length;
             Block root = new Block(0, (int) 1e8 + 10);
             root.stackHeight = 0;
-            List<Block> allBlocks = new ArrayList<>();
             List<Integer> res = new ArrayList<>();
+            int maxStackHeight = 0;
             for (int[] position : positions) {
                 int left = position[0], sideLength = position[1];
                 Block block = new Block(left, sideLength);
+                // 找到所有可能重叠的方块
                 List<Block> blocks = overlapBlocks(root, block);
-                int maxStackHeight = 0;
-                for (Block bottomBlock : blocks) {
-                    maxStackHeight = Math.max(maxStackHeight, bottomBlock.stackHeight);
-                }
-                final int _finalMaxStackHeight = maxStackHeight;
-                List<Block> filterBlocks = blocks.stream().filter(b -> b.stackHeight == _finalMaxStackHeight).collect(Collectors.toList());
-                block.stackHeight = maxStackHeight + sideLength;
-                filterBlocks.forEach(b -> b.upperBlocks.add(block));
-                allBlocks.add(block);
-                res.add(allBlocks.stream().mapToInt(b -> b.stackHeight).max().getAsInt());
+                // 计算这些方块中，最高的堆叠高度
+                final int maxStackHeightOfOverlapBlock = blocks.stream().mapToInt(b -> b.stackHeight).max().orElse(0);
+                // 把方块放到最高的方块上
+                block.stackHeight = maxStackHeightOfOverlapBlock + sideLength;
+                blocks.stream()
+                        .filter(b -> b.stackHeight == maxStackHeightOfOverlapBlock)
+                        .forEach(b -> b.upperBlocks.add(block));
+                // 计算当前所有方块的堆叠高度
+                maxStackHeight = Math.max(maxStackHeight, block.stackHeight);
+                res.add(maxStackHeight);
             }
             return res;
         }
