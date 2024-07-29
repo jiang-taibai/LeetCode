@@ -23,7 +23,7 @@ public class DailyPractice_20240730 {
             for (int i = 0; i < variables.length; ++i) {
                 int[] variable = variables[i];
                 int a = variable[0], b = variable[1], c = variable[2], m = variable[3];
-                if (pow(pow(a, b, 10), c, m) == target) res.add(i);
+                if (fastPow(fastPow(a, b, 10), c, m) == target) res.add(i);
             }
             return res;
         }
@@ -35,6 +35,18 @@ public class DailyPractice_20240730 {
             if (memo.containsKey(key)) return memo.get(key);
             int res = (pow(a, b / 2, mod) % mod * pow(a, b - b / 2, mod) % mod) % mod;
             memo.put(key, res);
+            return res;
+        }
+
+        private int fastPow(int a, int b, int mod) {
+            int res = 1;
+            while (b != 0) {
+                if ((b & 1) != 0) {
+                    res = res * a % mod;
+                }
+                a = a * a % mod;
+                b >>= 1;
+            }
             return res;
         }
     }
