@@ -23,7 +23,6 @@ public class DailyPractice_20240819 {
             // 可获得出勤奖励的组合数量
             int[][][] dp = new int[n + 1][3][2];
             dp[0][0][0] = 1;
-//            dp[1][0][0] = dp[1][1][0] = dp[1][0][1] = 1;
             for (int i = 1; i <= n; i++) {
                 for (int j = 0; j <= 2; j++) {
                     dp[i][0][0] += dp[i - 1][j][0];
