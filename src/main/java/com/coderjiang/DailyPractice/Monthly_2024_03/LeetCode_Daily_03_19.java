@@ -1,7 +1,5 @@
 package com.coderjiang.DailyPractice.Monthly_2024_03;
 
-import javafx.util.Pair;
-
 /**
  * <p>Creation Time: 2024/3/19</p>
  * <p>Description: TODO</p>
