@@ -16,15 +16,15 @@ public class DailyPractice_20240826 {
 
     static class Solution {
         public int getImportance(List<Employee> employees, int id) {
-            final Map<Integer, Employee> id2employee = new HashMap<>();
-            employees.forEach(e -> id2employee.put(e.id, e));
+            final Employee[] employeeArray = new Employee[2000 + 1];
+            employees.forEach(e -> employeeArray[e.id] = e);
             int res = 0;
             Queue<Employee> que = new LinkedList<>();
-            que.add(id2employee.get(id));
-            while(!que.isEmpty()) {
+            que.add(employeeArray[id]);
+            while (!que.isEmpty()) {
                 Employee employee = que.poll();
                 res += employee.importance;
-                employee.subordinates.forEach(subId -> que.add(id2employee.get(subId)));
+                employee.subordinates.forEach(subId -> que.add(employeeArray[subId]));
             }
             return res;
         }
