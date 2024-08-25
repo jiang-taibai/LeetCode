@@ -28,7 +28,6 @@ public class DailyPractice_20240825 {
         private boolean dfs(int state, int curSum, int targetSum, int[] nums) {
             int n = nums.length;
             if (state + 1 == (1 << n) && curSum == 0) return true;
-            String key = String.format("%d,%d", state, curSum);
             if (memo.containsKey(state) && memo.get(state).containsKey(curSum)) return memo.get(state).get(curSum);
             boolean res = false;
             for (int i = 0; i < n; i++) {
