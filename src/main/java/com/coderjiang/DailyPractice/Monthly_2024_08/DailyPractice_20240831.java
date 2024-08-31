@@ -26,12 +26,14 @@ public class DailyPractice_20240831 {
         }
 
         private boolean validSquare(char[][] grid, int i, int j) {
-            int bCount = 0, wCount = 0;
-            int lt = grid[i][j] == 'B' ? bCount++ : wCount++;
-            int lb = grid[i + 1][j] == 'B' ? bCount++ : wCount++;
-            int rt = grid[i][j + 1] == 'B' ? bCount++ : wCount++;
-            int rb = grid[i + 1][j + 1] == 'B' ? bCount++ : wCount++;
-            return bCount >= 3 || wCount >= 3;
+            int bCount = 0;
+            int[][] directions = new int[][]{{0, 0}, {0, 1}, {1, 0}, {1, 1}};
+            for (int[] direction : directions) {
+                if (grid[i + direction[0]][j + direction[1]] == 'B') {
+                    bCount++;
+                }
+            }
+            return bCount != 2;
         }
     }
 
