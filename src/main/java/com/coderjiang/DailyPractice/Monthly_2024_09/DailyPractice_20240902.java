@@ -21,15 +21,13 @@ public class DailyPractice_20240902 {
         public static int foo = 0;
 
         public int maxConsecutiveAnswers(String answerKey, int k) {
-            int t = 0, f = 0;
-            int l = 0, r = k - 1;
             char[] chars = answerKey.toCharArray();
             int n = chars.length;
-            for (int i = 0; i <= r; i++) {
-                if (chars[i] == T) t++;
-                else f++;
-            }
+            int t = 0, f = 0;
+            int l = 0, r = k - 1;
             int res = k;
+
+            for (int i = 0; i <= r; i++) foo = chars[r] == T ? t++ : f++;
             while (r + 1 < n) {
                 r++;
                 foo = chars[r] == T ? t++ : f++;
@@ -39,6 +37,7 @@ public class DailyPractice_20240902 {
                 }
                 res = Math.max(res, r - l + 1);
             }
+
             return res;
         }
     }
