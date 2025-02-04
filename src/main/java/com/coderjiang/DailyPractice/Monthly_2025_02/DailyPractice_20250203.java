@@ -1,6 +1,4 @@
-package com.coderjiang.DailyPractice.Monthly_2025_01;
-
-import java.util.*;
+package com.coderjiang.DailyPractice.Monthly_2025_02;
 
 /**
  * @author Jiang
