@@ -1,7 +1,5 @@
 package com.coderjiang.DailyPractice.Monthly_2025_02;
 
-import javafx.util.Pair;
-
 import java.util.*;
 
 /**
@@ -18,8 +16,8 @@ public class DailyPractice_20250228 {
 
     static class Solution {
         class FoodRatings {
-            private Map<String, Pair<Integer, String>> foodMap;
-            private Map<String, TreeSet<Pair<Integer, String>>> ratingMap;
+            private Map<String, Map.Entry<Integer, String>> foodMap;
+            private Map<String, TreeSet<Map.Entry<Integer, String>>> ratingMap;
             private int n;
 
             public FoodRatings(String[] foods, String[] cuisines, int[] ratings) {
@@ -31,23 +29,23 @@ public class DailyPractice_20250228 {
                     String food = foods[i];
                     String cuisine = cuisines[i];
                     int rating = ratings[i];
-                    foodMap.put(food, new Pair<>(rating, cuisine));
+                    foodMap.put(food, new AbstractMap.SimpleEntry<>(rating, cuisine));
                     ratingMap.computeIfAbsent(cuisine, k -> new TreeSet<>((a, b) -> {
                         if (!a.getKey().equals(b.getKey())) {
                             return a.getKey() - b.getKey();
                         }
                         return a.getValue().compareTo(b.getValue());
-                    })).add(new Pair<>(n - rating, food));
+                    })).add(new AbstractMap.SimpleEntry<>(n - rating, food));
                 }
             }
 
             public void changeRating(String food, int newRating) {
-                Pair<Integer, String> pair = foodMap.get(food);
+                Map.Entry<Integer, String> pair = foodMap.get(food);
                 int oldRating = pair.getKey();
                 String cuisine = pair.getValue();
-                ratingMap.get(cuisine).remove(new Pair<>(n - oldRating, food));
-                ratingMap.get(cuisine).add(new Pair<>(n - newRating, food));
-                foodMap.put(food, new Pair<>(newRating, cuisine));
+                ratingMap.get(cuisine).remove(new AbstractMap.SimpleEntry<>(n - oldRating, food));
+                ratingMap.get(cuisine).add(new AbstractMap.SimpleEntry<>(n - newRating, food));
+                foodMap.put(food, new AbstractMap.SimpleEntry<>(newRating, cuisine));
             }
 
             public String highestRated(String cuisine) {
