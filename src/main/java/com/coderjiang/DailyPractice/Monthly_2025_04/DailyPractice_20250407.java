@@ -31,8 +31,6 @@ public class DailyPractice_20250407 {
                         dp[i][j] = dp[i][j + nums[i]] = true;
                         if (j == target || j + nums[i] == target) return true;
                     }
-                    dp[i][j] = dp[i][j] || dp[i - 1][j];
-                    dp[i][j + nums[i]] = dp[i][j + nums[i]] || dp[i - 1][j];
                 }
                 preSum += nums[i];
             }
