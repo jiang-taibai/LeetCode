@@ -39,6 +39,4 @@ build/
 
 ### Custom ###
 .idea
-.clang-format
-CMakeLists.txt
-cmake-build-debug
+out
