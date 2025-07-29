@@ -15,17 +15,17 @@ public class DailyPractice_20250728 {
     static class Solution {
         public int countMaxOrSubsets(int[] nums) {
             int maxNum = 0;
-            for(int num : nums) {
+            for (int num : nums) {
                 maxNum |= num;
             }
             return dfs(nums, 0, maxNum, 0);
         }
 
         private int dfs(int[] nums, int num, int maxNum, int index) {
-            if(num == maxNum) {
+            if (num == maxNum) {
                 return 1 << (nums.length - index);
             }
-            if(index >= nums.length) return 0;
+            if (index >= nums.length) return 0;
             return dfs(nums, num | nums[index], maxNum, index + 1) +
                     dfs(nums, num, maxNum, index + 1);
         }
